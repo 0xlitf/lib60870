@@ -26,23 +26,25 @@ rawMessageHandler (void* parameter, uint8_t* msg, int msgSize, bool sent)
 static void
 connectionHandler (void* parameter, CS104_Connection connection, CS104_ConnectionEvent event)
 {
+    printf("** [lib60870-C] connectionHandler event: ");
     switch (event) {
     case CS104_CONNECTION_OPENED:
-        printf("Connection established\n");
+        printf("Connection established");
         break;
     case CS104_CONNECTION_CLOSED:
-        printf("Connection closed\n");
+        printf("Connection closed");
         break;
     case CS104_CONNECTION_FAILED:
-        printf("Failed to connect\n");
+        printf("Failed to connect");
         break;
     case CS104_CONNECTION_STARTDT_CON_RECEIVED:
-        printf("Received STARTDT_CON\n");
+        printf("Received STARTDT_CON");
         break;
     case CS104_CONNECTION_STOPDT_CON_RECEIVED:
-        printf("Received STOPDT_CON\n");
+        printf("Received STOPDT_CON");
         break;
     }
+    printf(" ** \n");
 }
 
 /*
@@ -105,7 +107,7 @@ asduReceivedHandler (void* parameter, int address, CS101_ASDU asdu)
 int
 main(int argc, char** argv)
 {
-    const char* ip = "localhost";
+    const char* ip = "localhost"; // 10.10.5.251
     uint16_t port = IEC_60870_5_104_DEFAULT_PORT;
     const char* localIp = NULL;
     int localPort = -1;
@@ -181,9 +183,12 @@ main(int argc, char** argv)
 
     Thread_sleep(1000);
 
-    CS104_Connection_destroy(con);
+    //printf("CS104_Connection_destroy\n");
+    //CS104_Connection_destroy(con);
 
-    printf("exit\n");
+    //Thread_sleep(3000);
+    //printf("exit\n");
+
 }
 
 
